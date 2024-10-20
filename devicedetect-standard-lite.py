@@ -141,4 +141,4 @@ def main():
         print(f"An error occurred during scanning: {e}")
 
 # Uncomment the following line to run the script
-# main()
+main()
