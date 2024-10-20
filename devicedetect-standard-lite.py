@@ -131,11 +131,13 @@ def main():
         if should_detect_os_family(scan_result):
             os_family = detect_os_family(scan_result)
         else:
-            os_family = scan_result['osmatch'][0]['name']  # Use the highest osmatch result
+            os_family = scan_result['osmatch'][0]['osclass'][0]['osfamily']  # Use the highest osmatch result
         
         device_type = detect_device_type(scan_result)
+        os_name = scan_result['osmatch'][0]['name']
 
         print(f"\nFinal Detected OS Family: {os_family}")
+        print(f"\nFinal Detected OS : {os_name}")
         print(f"Final Detected Device Type: {device_type}")
     except Exception as e:
         print(f"An error occurred during scanning: {e}")
