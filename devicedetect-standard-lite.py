@@ -8,7 +8,7 @@ from device_type_category import OS_TYPE_CATEGORY  # Assuming OS_TYPE_CATEGORY i
 def perform_nmap_scan(ip):
     scanner = nmap.PortScanner()
     print(f"Running intense scan on {ip}...")
-    nmap_arg = f"-O -sU -sS T:1-65535,U:67,68,111,123,137,138,161,162,500,554,631,1701,1812,1813,1900,1935,2049,3702,4500,5060,5061,5353,10000,16384,32767 -T4 --min-rate 500 --min-parallelism 50 --max-retries 3 --host-timeout 5m --script=cups-info,snmp-info,http-title,snmp-sysdescr,sip-methods,nbstat,smb-os-discovery,upnp-info"
+    nmap_arg = f"-O -sU -sS T:1-65535,U:67,68,111,123,137,138,161,162,500,554,631,1701,1812,1813,1900,1935,2049,3702,4500,5060,5061,5353,10000,16384,32767 -T4 --min-rate 500 --min-parallelism 50 --max-retries 3 --host-timeout 5m --script=rdp-ntlm-info,cups-info,snmp-info,http-enum,http-title,snmp-sysdescr,sip-methods,nbstat,smb-os-discovery,upnp-info,nbtstat,http-server-header,sip-enum-users,rdp-vuln-ms12-020"
     scanner.scan(ip, arguments=nmap_arg)
     return scanner[ip]
 
