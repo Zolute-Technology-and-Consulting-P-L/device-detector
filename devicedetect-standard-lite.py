@@ -41,7 +41,8 @@ def detect_os_family(scan_result):
 
     for os_family in possible_os_families:
         for keyword in OS_TYPE_CATEGORY[os_family]["keywords"]:
-            if re.search(rf'\b{keyword}\b', output, re.IGNORECASE):
+            # Ensure that only full-word matches are counted
+            if re.search(rf'\b{re.escape(keyword)}\b', output, re.IGNORECASE):
                 os_family_score[os_family] += 1
                 matched_keywords[os_family].append(keyword)
 
@@ -88,7 +89,8 @@ def detect_device_type(scan_result):
 
     for device_type in possible_device_types:
         for keyword in DEVICE_TYPE_CATEGORY[device_type]["keywords"]:
-            if re.search(rf'\b{keyword}\b', output, re.IGNORECASE):
+            # Ensure that only full-word matches are counted
+            if re.search(rf'\b{re.escape(keyword)}\b', output, re.IGNORECASE):
                 device_type_score[device_type] += 1
                 matched_keywords[device_type].append(keyword)
 
@@ -106,19 +108,37 @@ def detect_device_type(scan_result):
     else:
         return "Unknown Device Type"
 
+# Function to decide whether to detect OS family based on osmatch accuracy
+def should_detect_os_family(scan_result):
+    # Check the osmatch section for the highest accuracy
+    if 'osmatch' in scan_result:
+        highest_accuracy = max([int(os['accuracy']) for os in scan_result['osmatch']])
+        print(f"Highest OS Match Accuracy: {highest_accuracy}%")
+        # If highest accuracy is 90% or above, trust Nmap's result
+        if highest_accuracy >= 90:
+            print("OS Match accuracy is 90% or above. Using Nmap's OS match.")
+            return False
+    return True
+
 # Main function to run both OS family and device type detection
 def main():
     ip_address = input("Enter the IP address to scan: ")
     
     try:
         scan_result = perform_nmap_scan(ip_address)
-        print(scan_result)
-        os_family = detect_os_family(scan_result)
+
+        # Check if we should detect OS family based on osmatch accuracy
+        if should_detect_os_family(scan_result):
+            os_family = detect_os_family(scan_result)
+        else:
+            os_family = scan_result['osmatch'][0]['name']  # Use the highest osmatch result
+        
         device_type = detect_device_type(scan_result)
+
         print(f"\nFinal Detected OS Family: {os_family}")
         print(f"Final Detected Device Type: {device_type}")
     except Exception as e:
         print(f"An error occurred during scanning: {e}")
 
 # Uncomment the following line to run the script
-main()
+# main()
