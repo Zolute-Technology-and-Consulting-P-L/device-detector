@@ -51,7 +51,7 @@ DEVICE_TYPE_CATEGORY = {
         "keywords": [
             "sip phone", "ip phone", "voip phone", "sipphone", "cisco", "grandstream",
             "polycom", "astra", "avaya", "mitel", "yealink", "snom", "fanvil",
-            "voip", "sip client", "softphone", "ip telephony", "unified communications","sip","sip-methods","MESSAGE","SUBSCRIBE","INVITE"
+            "voip", "sip client", "softphone", "ip telephony", "unified communications","sip","sip-methods","MESSAGE","SUBSCRIBE","INVITE","sip-tls"
         ],
         "tcp_ports": [5060, 5061, 80, 443, 22],
         "udp_ports": [5060, 5061, 10000, 16384, 32767]
