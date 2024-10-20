@@ -112,6 +112,7 @@ def main():
     
     try:
         scan_result = perform_nmap_scan(ip_address)
+        print(scan_result)
         os_family = detect_os_family(scan_result)
         device_type = detect_device_type(scan_result)
         print(f"\nFinal Detected OS Family: {os_family}")
