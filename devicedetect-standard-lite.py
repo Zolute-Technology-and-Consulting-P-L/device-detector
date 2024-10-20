@@ -126,6 +126,7 @@ def main():
     
     try:
         scan_result = perform_nmap_scan(ip_address)
+        print(scan_result)
 
         # Check if we should detect OS family based on osmatch accuracy
         if should_detect_os_family(scan_result):
