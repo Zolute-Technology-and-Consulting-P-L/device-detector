@@ -24,7 +24,8 @@ DEVICE_TYPE_CATEGORY = {
             "wap", "accesspoint", "wifi", "guangdong", "zte", "huawei", "ruckus",
             "ubiquiti", "wireless", "802.11", "hotspot", "extender", "netgear",
             "access point", "wi-fi", "wlan", "wireless lan", "wireless network",
-            "wireless bridge", "wireless repeater", "mesh wifi", "enterprise wifi", "Shenzhen Bilian Electronic"
+            "wireless bridge", "wireless repeater", "mesh wifi", "enterprise wifi", "Shenzhen Bilian Electronic","FIT","AP",
+            "Cambridge Industries(Group)"
         ],
         "tcp_ports": [22, 23, 80, 443, 161, 2000, 8080, 8443],
         "udp_ports": [67, 68, 123, 161, 1812, 1813]
