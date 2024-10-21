@@ -43,7 +43,7 @@ DEVICE_TYPE_CATEGORY = {
         "keywords": [
             "mobile", "smartphone", "android", "ios", "iphone", "samsung",
             "huawei", "xiaomi", "oppo", "vivo", "oneplus", "google pixel",
-            "tablet", "ipad", "mobile device", "cell phone"
+            "tablet", "ipad", "mobile device", "cell phone","freeciv","google"
         ],
         "tcp_ports": [80, 443, 5223, 5228],
         "udp_ports": [123, 500, 4500]
