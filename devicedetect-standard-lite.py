@@ -68,10 +68,18 @@ def detect_device_type(scan_result):
 
     # Step 1: Remove osmatches with accuracy < 91% from the copied scan result
     if 'osmatches' in modified_scan_result:
-        modified_scan_result['osmatches'] = [
+        filtered_osmatches = [
             os_match for os_match in modified_scan_result['osmatches'] 
             if os_match.get('accuracy', 0) >= 91
         ]
+        modified_scan_result['osmatches'] = filtered_osmatches
+
+        # Debugging output to verify filtering
+        print("\nFiltered osmatches (accuracy >= 91%):")
+        for os_match in modified_scan_result['osmatches']:
+            print(f"OS: {os_match['name']}, Accuracy: {os_match['accuracy']}")
+    else:
+        print("No osmatches found in the scan result.")
 
     # Step 2: Initialize device type scores, matched ports, and keywords
     device_type_score = defaultdict(int)
@@ -97,6 +105,7 @@ def detect_device_type(scan_result):
                 matched_ports[device_type].append(port)
 
     # Step 4: Search for keywords in the modified scan result (excluding low-accuracy osmatches)
+    print(modified_scan_result)
     output = str(modified_scan_result)
 
     # Search for keywords in the entire modified scan result for possible device types
