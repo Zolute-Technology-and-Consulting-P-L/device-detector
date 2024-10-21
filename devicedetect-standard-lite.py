@@ -109,6 +109,7 @@ def detect_device_type(scan_result):
                 matched_ports[device_type].append(port)
 
     # Step 4: Search for keywords in the modified scan result (excluding low-accuracy osmatch)
+    print(modified_scan_result)
     output = str(modified_scan_result)
 
     # Search for keywords in the entire modified scan result for possible device types
