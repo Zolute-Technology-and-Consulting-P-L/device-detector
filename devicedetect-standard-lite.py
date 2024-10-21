@@ -1,5 +1,6 @@
 import nmap
 import re
+import copy
 from collections import defaultdict
 from device_type_category import DEVICE_TYPE_CATEGORY  # Assuming DEVICE_TYPE_CATEGORY is in the mapping file
 from device_type_category import OS_TYPE_CATEGORY  # Assuming OS_TYPE_CATEGORY is in the mapping file
@@ -62,6 +63,17 @@ def detect_os_family(scan_result):
 
 # Function to detect device type based on matching open ports and keywords
 def detect_device_type(scan_result):
+    # Create a deep copy of the scan result
+    modified_scan_result = copy.deepcopy(scan_result)
+
+    # Step 1: Remove osmatches with accuracy < 91% from the copied scan result
+    if 'osmatches' in modified_scan_result:
+        modified_scan_result['osmatches'] = [
+            os_match for os_match in modified_scan_result['osmatches'] 
+            if os_match.get('accuracy', 0) >= 91
+        ]
+
+    # Step 2: Initialize device type scores, matched ports, and keywords
     device_type_score = defaultdict(int)
     matched_ports = defaultdict(list)
     matched_keywords = defaultdict(list)
@@ -69,41 +81,46 @@ def detect_device_type(scan_result):
     tcp_ports = scan_result.get('tcp', {})
     udp_ports = scan_result.get('udp', {})
 
-    # Step 1: Match open ports with potential device types
+    # Step 3: Match open ports with potential device types
     possible_device_types = set()
 
     for device_type, details in DEVICE_TYPE_CATEGORY.items():
         for port in tcp_ports:
-            if port in details["tcp_ports"]:
+            if port in details.get("tcp_ports", []):
                 possible_device_types.add(device_type)
                 device_type_score[device_type] += 1
                 matched_ports[device_type].append(port)
         for port in udp_ports:
-            if port in details["udp_ports"]:
+            if port in details.get("udp_ports", []):
                 possible_device_types.add(device_type)
                 device_type_score[device_type] += 1
                 matched_ports[device_type].append(port)
 
-    # Step 2: Search for keywords in Nmap output, but only for device types matched by ports
-    output = str(scan_result)
+    # Step 4: Search for keywords in the modified scan result (excluding low-accuracy osmatches)
+    output = str(modified_scan_result)
 
+    # Search for keywords in the entire modified scan result for possible device types
     for device_type in possible_device_types:
-        for keyword in DEVICE_TYPE_CATEGORY[device_type]["keywords"]:
+        for keyword in DEVICE_TYPE_CATEGORY[device_type].get("keywords", []):
             # Ensure that only full-word matches are counted
             if re.search(rf'\b{re.escape(keyword)}\b', output, re.IGNORECASE):
                 device_type_score[device_type] += 1
                 matched_keywords[device_type].append(keyword)
 
-    # Step 3: Print matched keywords and ports
+    # Step 5: Print matched keywords and ports
     print("\nDevice Type Detection Details:")
     for device_type in device_type_score:
         print(f"\nDevice Type: {device_type}")
         print(f"Score: {device_type_score[device_type]}")
         print(f"Matched Ports: {matched_ports[device_type]}")
-        print(f"Matched Keywords: {matched_keywords[device_type]}")
+        if matched_keywords[device_type]:
+            print(f"Matched Keywords: {matched_keywords[device_type]}")
+        else:
+            print("Matched Keywords: None")
 
-    # Step 4: Return the device type with the highest score
+    # Step 6: Return the device type with the highest score
     if device_type_score:
+        # In case of a tie, this will return one of the highest scoring device types
         return max(device_type_score, key=device_type_score.get)
     else:
         return "Unknown Device Type"
