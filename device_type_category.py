@@ -15,7 +15,7 @@ DEVICE_TYPE_CATEGORY = {
             "apache", "nginx", "tomcat", "iis", "mysql", "mariadb", "postgresql", "database",
             "oracle", "mongodb", "ftp", "ssh", "samba", "nfs", "dns", "dhcp", "http", "https",
             "vps", "hypervisor", "docker", "kubernetes", "cloud", "active directory", "ldap",
-            "rdp", "sftp", "smtp", "pop3", "imap", "webmail", "vpn", "ssh", "telnet"
+            "rdp", "sftp", "smtp", "pop3", "imap", "webmail", "vpn", "ssh", "telnet","vmware","hyper-v"
         ],
         "tcp_ports": [22, 23, 25, 53, 80, 110, 111, 143, 443, 465, 587, 993, 995, 2049, 3306, 
                     3389, 5432, 5900, 5985, 5986, 8080, 8443, 9090, 9443, 27017, 22, 636],
@@ -46,7 +46,7 @@ DEVICE_TYPE_CATEGORY = {
         "keywords": [
             "workstation", "pc", "desktop", "laptop", "personal computer",
             "windows", "linux", "mac", "intel", "amd", "dell", "hp", "lenovo",
-            "asus", "acer", "microsoft surface", "thinkpad", "macbook", "netbios","msrpc","vmware","server","esxi","freebsd"
+            "asus", "acer", "microsoft surface", "thinkpad", "macbook", "netbios","msrpc"
         ],
         "tcp_ports": [135, 139, 445, 3389, 5900, 5800, 22, 80, 443,5040],
         "udp_ports": [137, 138, 1900, 5353]
