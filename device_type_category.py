@@ -88,7 +88,7 @@ DEVICE_TYPE_CATEGORY = {
         "keywords": [
             "ipcamera", "ipcam", "cctv", "camera", "cam", "webcam", "nvr", "hd ip",
             "infrared", "ptz", "h.264", "hikvision", "dahua", "axis", "bosch",
-            "panasonic", "samsung techwin", "pelco", "onvif", "rtsp", "network camera"
+            "panasonic", "samsung techwin", "pelco", "onvif", "rtsp", "network camera", "webs"
         ],
         "tcp_ports": [80, 443, 554, 3702, 8000, 8080, 37777],
         "udp_ports": [554, 1935, 3702]
@@ -106,7 +106,7 @@ DEVICE_TYPE_CATEGORY = {
         "keywords": [
             "iot", "internet of things", "smart device", "smart home", "zigbee",
             "z-wave", "nest", "ring", "philips hue", "sonos", "amazon echo",
-            "google home", "smart thermostat", "smart lock", "smart plug"
+            "google home", "smart thermostat", "smart lock", "smart plug","webs"
         ],
         "tcp_ports": [80, 443, 8080, 1883, 8883],
         "udp_ports": [5353, 1900, 67, 68, 123]
