@@ -55,7 +55,7 @@ DEVICE_TYPE_CATEGORY = {
             "voip", "sip client", "softphone", "ip telephony", "unified communications","sip","sip-methods","MESSAGE","SUBSCRIBE","INVITE","sip-tls"
         ],
         "tcp_ports": [5060, 5061, 80, 443, 22],
-        "udp_ports": [5060, 5061, 10000, 16384, 32767]
+        "udp_ports": [5060, 5061, 10000, 5004,5005]
     },
     "PRINTER": {
         "keywords": [
@@ -83,7 +83,7 @@ DEVICE_TYPE_CATEGORY = {
             "cisco callmanager", "unified communications", "sip server", "voip server"
         ],
         "tcp_ports": [80, 443, 5038, 5060, 5061, 2000, 10000],
-        "udp_ports": [5060, 5061, 10000, 16384, 32767]
+        "udp_ports": [5060, 5061, 10000, 5004,5005]
     },
     "IPCAM": {
         "keywords": [
