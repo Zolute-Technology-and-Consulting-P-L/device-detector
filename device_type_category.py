@@ -24,7 +24,8 @@ DEVICE_TYPE_CATEGORY = {
             "wap", "accesspoint", "wifi", "guangdong", "zte", "huawei", "ruckus",
             "ubiquiti", "wireless", "802.11", "hotspot", "extender", "netgear",
             "access point", "wi-fi", "wlan", "wireless lan", "wireless network",
-            "wireless bridge", "wireless repeater", "mesh wifi", "enterprise wifi", "Shenzhen Bilian Electronic"
+            "wireless bridge", "wireless repeater", "mesh wifi", "enterprise wifi", "Shenzhen Bilian Electronic","FIT","AP",
+            "Cambridge Industries(Group)","TACACS","zeroconf"
         ],
         "tcp_ports": [22, 23, 80, 443, 161, 2000, 8080, 8443],
         "udp_ports": [67, 68, 123, 161, 1812, 1813]
@@ -42,7 +43,7 @@ DEVICE_TYPE_CATEGORY = {
         "keywords": [
             "mobile", "smartphone", "android", "ios", "iphone", "samsung",
             "huawei", "xiaomi", "oppo", "vivo", "oneplus", "google pixel",
-            "tablet", "ipad", "mobile device", "cell phone"
+            "tablet", "ipad", "mobile device", "cell phone","freeciv","google"
         ],
         "tcp_ports": [80, 443, 5223, 5228],
         "udp_ports": [123, 500, 4500]
