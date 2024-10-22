@@ -9,6 +9,18 @@ DEVICE_TYPE_CATEGORY = {
         "tcp_ports": [22, 23, 80, 443, 161, 830, 2000, 2001, 2002, 4786],
         "udp_ports": [161, 162, 67, 68, 123, 500]
     },
+    "SERVER": {
+        "keywords": [
+            "server", "esxi", "proxmox", "vcenter", "virtualization", "linux", "windows",
+            "apache", "nginx", "tomcat", "iis", "mysql", "mariadb", "postgresql", "database",
+            "oracle", "mongodb", "ftp", "ssh", "samba", "nfs", "dns", "dhcp", "http", "https",
+            "vps", "hypervisor", "docker", "kubernetes", "cloud", "active directory", "ldap",
+            "rdp", "sftp", "smtp", "pop3", "imap", "webmail", "vpn", "ssh", "telnet"
+        ],
+        "tcp_ports": [22, 23, 25, 53, 80, 110, 111, 143, 443, 465, 587, 993, 995, 2049, 3306, 
+                    3389, 5432, 5900, 5985, 5986, 8080, 8443, 9090, 9443, 27017, 22, 636],
+        "udp_ports": [53, 67, 68, 123, 161, 162, 514, 520, 161, 500, 4500, 2049, 5353]
+    },
     "ROUTER": {
         "keywords": [
             "router", "gateway", "cisco", "aruba", "dlink", "tp-link", "asus",
