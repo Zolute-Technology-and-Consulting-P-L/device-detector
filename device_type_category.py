@@ -34,7 +34,7 @@ DEVICE_TYPE_CATEGORY = {
         "keywords": [
             "workstation", "pc", "desktop", "laptop", "personal computer",
             "windows", "linux", "mac", "intel", "amd", "dell", "hp", "lenovo",
-            "asus", "acer", "microsoft surface", "thinkpad", "macbook", "netbios","msrpc"
+            "asus", "acer", "microsoft surface", "thinkpad", "macbook", "netbios","msrpc","vmware","server","esxi","freebsd"
         ],
         "tcp_ports": [135, 139, 445, 3389, 5900, 5800, 22, 80, 443,5040],
         "udp_ports": [137, 138, 1900, 5353]
