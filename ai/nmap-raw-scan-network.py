@@ -30,6 +30,20 @@ def get_interfaces():
     interfaces = netifaces.interfaces()
     return interfaces
 
+# Function to check if an IP address is loopback or in a /8 network (private networks)
+def is_excluded_network(ip_address, mask_bits):
+    ip_obj = ipaddress.IPv4Address(ip_address)
+    
+    # Exclude loopback addresses
+    if ip_obj.is_loopback:
+        return True
+    
+    # Exclude /8 networks (like 10.0.0.0/8 or any IP in 10.x.x.x)
+    if mask_bits == 8:
+        return True
+    
+    return False
+
 # Function to get online hosts on the network for each interface
 def get_online_hosts(interface):
     try:
@@ -40,6 +54,12 @@ def get_online_hosts(interface):
         ip_address = ip_info[netifaces.AF_INET][0]['addr']
         netmask = ip_info[netifaces.AF_INET][0]['netmask']
         mask_bits = netmask_to_cidr(netmask)  # Convert netmask to CIDR mask bits
+        
+        # Check if the IP address should be excluded
+        if is_excluded_network(ip_address, mask_bits):
+            print(f"Skipping network {ip_address}/{mask_bits} (loopback or /8 network)")
+            return []
+
         network = f"{ip_address}/{mask_bits}"  # CIDR notation network
 
         print(f"Scanning network: {network} on interface {interface}")
