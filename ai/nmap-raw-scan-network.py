@@ -3,6 +3,7 @@ import subprocess
 import re
 import json
 import netifaces
+import ipaddress
 
 # File to store scanned MAC addresses (used to resume)
 scanned_macs_file = 'scanned_macs.json'
@@ -19,6 +20,11 @@ def save_scanned_macs(scanned_macs):
     with open(scanned_macs_file, 'w') as file:
         json.dump(list(scanned_macs), file)
 
+# Function to convert netmask to CIDR mask bits
+def netmask_to_cidr(netmask):
+    # Convert the netmask (e.g., 255.255.255.0) to CIDR format (e.g., /24)
+    return ipaddress.IPv4Network(f"0.0.0.0/{netmask}").prefixlen
+
 # Function to detect all interfaces including VLANs
 def get_interfaces():
     interfaces = netifaces.interfaces()
@@ -33,7 +39,8 @@ def get_online_hosts(interface):
 
         ip_address = ip_info[netifaces.AF_INET][0]['addr']
         netmask = ip_info[netifaces.AF_INET][0]['netmask']
-        network = f"{ip_address}/{netmask}"
+        mask_bits = netmask_to_cidr(netmask)  # Convert netmask to CIDR mask bits
+        network = f"{ip_address}/{mask_bits}"  # CIDR notation network
 
         print(f"Scanning network: {network} on interface {interface}")
         
