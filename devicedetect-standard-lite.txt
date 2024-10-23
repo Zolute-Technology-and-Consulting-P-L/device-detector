@@ -66,20 +66,24 @@ def detect_device_type(scan_result):
     # Create a deep copy of the scan result
     modified_scan_result = copy.deepcopy(scan_result)
 
-    # Step 1: Remove osmatches with accuracy < 91% from the copied scan result
-    if 'osmatches' in modified_scan_result:
-        filtered_osmatches = [
-            os_match for os_match in modified_scan_result['osmatches'] 
-            if os_match.get('accuracy', 0) >= 91
-        ]
-        modified_scan_result['osmatches'] = filtered_osmatches
+    # Step 1: Remove osmatch where the first osclass has accuracy < 91% from the copied scan result
+    if 'osmatch' in modified_scan_result:
+        filtered_osmatch = []
+        for os_match in modified_scan_result['osmatch']:
+            os_classes = os_match.get('osclass', [])
+            # Check only the first osclass for accuracy >= 91
+            if os_classes and int(os_classes[0].get('accuracy', 0)) >= 91:
+                filtered_osmatch.append(os_match)
+
+        modified_scan_result['osmatch'] = filtered_osmatch
 
         # Debugging output to verify filtering
-        print("\nFiltered osmatches (accuracy >= 91%):")
-        for os_match in modified_scan_result['osmatches']:
-            print(f"OS: {os_match['name']}, Accuracy: {os_match['accuracy']}")
+        print("\nFiltered osmatch (where the first osclass has accuracy >= 91%):")
+        for os_match in modified_scan_result['osmatch']:
+            first_osclass = os_match['osclass'][0]
+            print(f"OS: {os_match['name']}, First OS Class Accuracy: {first_osclass['accuracy']}")
     else:
-        print("No osmatches found in the scan result.")
+        print("No osmatch found in the scan result.")
 
     # Step 2: Initialize device type scores, matched ports, and keywords
     device_type_score = defaultdict(int)
@@ -104,7 +108,7 @@ def detect_device_type(scan_result):
                 device_type_score[device_type] += 1
                 matched_ports[device_type].append(port)
 
-    # Step 4: Search for keywords in the modified scan result (excluding low-accuracy osmatches)
+    # Step 4: Search for keywords in the modified scan result (excluding low-accuracy osmatch)
     print(modified_scan_result)
     output = str(modified_scan_result)
 
