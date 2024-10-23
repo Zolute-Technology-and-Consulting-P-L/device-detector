@@ -70,9 +70,7 @@ def clean_nmap_output(nmap_output):
 def run_nmap_scan(host_ip, scanned_macs, output_folder):
     # Nmap command with specified arguments
     nmap_command = [
-        "nmap", "-sV", "-O", "-sU", "-sS", "-p", "T:1-65535,U:67,68,111,123,137,138,161,162,500,554,631,1701,1812,1813,1900,1935,2049,3702,4500,5004,5005,5060,5061,5353,10000",
-        "-T4", "-open", "--min-rate", "300", "--min-parallelism", "50", "--max-retries", "5", "--host-timeout", "10m",
-        "--script=rdp-ntlm-info,cups-info,snmp-info,http-title,snmp-sysdescr,sip-methods,nbstat,smb-os-discovery,upnp-info,nbstat,http-server-header,rdp-vuln-ms12-020", host_ip
+        "nmap", "-A", host_ip
     ]
     
     # Execute Nmap scan
