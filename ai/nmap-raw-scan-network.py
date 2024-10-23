@@ -105,7 +105,7 @@ def run_nmap_scan(host_ip, scanned_macs, output_folder):
     # Execute Nmap scan
     result = subprocess.run(nmap_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     nmap_raw_output = result.stdout.decode("utf-8")
-    
+    print(nmap_raw_output)
     # Extract MAC address
     mac_match = re.search(r'MAC Address: ([0-9A-Fa-f:]{17})', nmap_raw_output)
     if not mac_match:
