@@ -60,7 +60,7 @@ def scan_and_save_by_mac(subnet, output_folder):
         if mac_address:
             # Run a full Nmap scan for this specific host
             nmap_command_for_host = [
-                "nmap", "-F", "-sS", "-sU", "-O", "-n", "--script=rdp-ntlm-info,cups-info,snmp-info,http-title,"
+                "nmap", "-F", "-sS", "-sU", "-O", "-n", "--script=rdp-ntlm-info,snmp-info,http-title,"
                 "snmp-sysdescr,sip-methods,nbstat,smb-os-discovery,upnp-info,nbstat,http-server-header,"
                 "rdp-vuln-ms12-020,bacnet-info,omron-info,pcworx-info,modbus-discover,s7-info,enip-info,hnap-info",
                 "-oN", "-",  # Save output as raw text (-oN)
